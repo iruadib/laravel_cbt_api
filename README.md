@@ -11,14 +11,14 @@ Adapun semua orang yang terlibat dalam project ini antara lain :
 ## Setup
 Untuk menjalankan projek ini, lakukan langkah berikut:
 ```
-$ cd ../folder
+$ cd folder
 $ npm install
 $ npm run prod
 $ php artisan serve
 ```
 atau
 ```
-$ cd ../folder
+$ cd folder
 $ yarn install
 $ yarn prod
 $ php artisan serve
