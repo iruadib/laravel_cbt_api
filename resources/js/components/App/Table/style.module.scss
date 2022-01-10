@@ -1,0 +1,217 @@
+.parent {
+  position: relative;
+  width: 100%;
+  font-style: inherit !important;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  box-shadow: 0px 3px 3px -1px rgba(10, 22, 70, .1), 0px 0px 1px 0px rgba(10, 22, 70, .06);
+  padding: 2rem;
+  margin: .75rem 0;
+  border-radius: .75rem;
+}
+
+.cont {
+  position: relative;
+  overflow-x: auto;
+  width: 100%;
+  font-style: inherit !important;
+  z-index: inherit !important;
+}
+
+.table {
+  border-collapse: collapse;
+  overflow-x: auto;
+  width: 100%;
+  background: white;
+  white-space: nowrap;
+  z-index: inherit !important;
+}
+.table > thead > tr,
+.table > tbody > tr,
+.table > tfoot > tr {
+  transition: all .3s ease;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  text-align: left;
+  padding: 16px;
+  vertical-align: middle;
+  border-top: 0;
+  transition: all 0.3s ease;
+}
+.table > thead > tr > th {
+  font-weight: 400;
+  color: #757575;
+  vertical-align: bottom;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  text-transform: uppercase;
+  font-size: .7em;
+}
+.table > tbody > tr:hover td {
+  background-color: rgb(249, 250, 251);
+}
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.table > tbody + tbody {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.table .table {
+  background-color: #ffffff;
+}
+.table .no-border {
+  border: 0;
+}
+.table-bordered {
+  border: 0;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+.table-bordered > thead > tr > th {
+ border-bottom-width: 2px;
+}
+
+.preview {
+  color: rgb(167, 139, 250);
+  text-decoration: none;
+
+  &:hover, &:focus-within {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    color: rgb(124, 58, 237);
+    text-decoration: underline;
+  }
+}
+
+.date {
+  position: relative;
+  font-size: .85rem;
+}
+
+.rename {
+  position: relative;
+  background: transparent; 
+  border-radius: .4rem;
+  text-transform: lowercase;
+  padding: .4rem .75rem;
+  transition: .2s ease;
+  outline: none;
+  border: .75px solid rgba(139, 92, 246, .3);
+  display: inline-block;
+  color: rgb(167, 139, 250);
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: flex-start;
+  margin-right: 0.25rem;
+  
+  &:hover, &:focus-within {
+    background: rgba(139, 92, 246, .1);
+    border: .75px solid rgba(139, 92, 246, .5);
+  }
+  &:focus {
+    background: rgba(139, 92, 246, .2);
+  }
+}
+
+.del {
+  position: relative;
+  background: transparent; 
+  border-radius: 100rem;
+  padding: .5rem;
+  transition: .2s ease;
+  outline: none;
+  border: none;
+  color: rgba(139, 92, 246, .7);
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: flex-start;
+  margin-left: .25rem;
+  
+  .svg {
+    display: block;
+    margin: auto;
+    height: 24px;
+    width: 24px;
+  }
+  
+  &:hover, &:focus-within {
+    background: rgb(229, 231, 235);
+  }
+  &:focus {
+    background: rgb(209, 213, 219);
+  }
+}
+
+.loadcont {
+  display: block;
+  text-align: center !important;
+}
+
+.loading {
+  margin: 1rem 0 0 0;
+  text-align: center !important;
+}
+
+.error {
+  text-align: center !important;
+  margin: 0.5rem 0 0 0;
+  color: rgb(239, 68, 68);
+}
+
+.more {
+  cursor: pointer;
+  line-height: inherit !important;
+  position: relative;
+  font-size: 1rem;
+  background: transparent;
+  text-transform: lowercase;
+  font-family: inherit;
+  padding: .4rem .75rem;
+  border: 0;
+  border: .75px solid rgba(139, 92, 246, .3);
+  border-radius: .4rem;
+  transition: .2s ease;
+  color: rgb(167, 139, 250);
+  outline: none;
+  display: inline-block;
+  width: max-content;
+  text-align: center !important;
+  z-index: inherit;
+  margin-top: .5rem;
+
+  &:hover, &:focus-within {
+    background: rgba(139, 92, 246, .1);
+    border: .75px solid rgba(139, 92, 246, .5);
+  }
+  &:focus {
+    background: rgba(139, 92, 246, .2);
+  }
+}

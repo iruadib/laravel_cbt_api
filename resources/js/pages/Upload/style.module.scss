@@ -1,0 +1,140 @@
+.parent {
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+
+  a {
+    text-decoration: none;
+  }
+
+  .modal {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    transform: translate(-50%, -50%);
+
+    @media not all and (min-width: 576px) {
+      position: relative;
+      top: 0; left: 0;
+      transform: none;
+    }
+
+    .card {
+      padding: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 0 solid #eceef3;
+      border-radius: .75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0 , 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+      .title {
+        text-transform: lowercase;
+        margin-bottom: 1.5rem;
+        text-align: center !important;
+      }
+
+      .drop {
+        padding: 1rem;
+        text-align: center !important;
+        border: 1px dashed rgb(107, 114, 128);
+        border-radius: .5rem;
+        margin-bottom: .5rem;
+    
+        img {
+          width: 100%;
+          max-width: 20rem;
+          -webkit-user-drag: none;
+        }
+    
+        input[type="file"] {
+          display: none;
+        }
+        .click {
+          color: black;
+          transition: .2s ease;
+
+          &:focus, &:focus-within {
+            color: rgb(167, 139, 250);
+          }
+        }
+      }
+      .desc {
+        text-align: center !important;
+        margin: .5rem 0;
+        display: none;
+        max-height: max-content;
+
+        &.show {
+          display: block;
+        }
+
+        .val {
+          display: inline-block;
+        }
+        .progress {
+          display: inline-block;
+
+          &.hide {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+  .btn, .back {
+    cursor: pointer;
+    line-height: inherit !important;
+    position: relative;
+    font-size: 1rem;
+    background: transparent;
+    text-transform: lowercase;
+    font-family: inherit;
+    padding: .4rem .75rem;
+    border: 0;
+    border: .75px solid rgba(167, 139, 250, .3);
+    border-radius: .4rem;
+    transition: .2s ease;
+    color: rgb(167, 139, 250);
+    outline: none;
+    display: inline-block;
+    width: 100%;
+
+    &:hover, &:focus-within {
+      background: rgba(167, 139, 250, .1);
+      border: .75px solid rgba(167, 139, 250, .5);
+    }
+    &:focus {
+      background: rgba(167, 139, 250, .2);
+    }
+  }
+  .btn {
+    margin-top: .5rem;
+  }
+  .back {
+    text-align: center !important;
+    margin-top: .5rem;
+  }
+  .error {
+    text-align: center !important;
+    margin: 0.5rem 0 0 0;
+    color: rgb(239, 68, 68);
+  }
+  .msg {
+    text-align: center !important;
+    margin: 0.5rem 0 0 0;
+    color: rgb(167, 139, 250);
+  }
+}

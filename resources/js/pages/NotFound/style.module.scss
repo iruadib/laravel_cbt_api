@@ -1,0 +1,55 @@
+.parent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 40rem;
+  height: 100%;
+  align-items: center;
+  vertical-align: middle;
+  margin: auto;
+  transition: padding .3s .3s ease-in-out;
+
+  @media not all and (min-width: 767px) {
+    padding: 0 1rem;
+  }
+
+  @media not all and (min-width: 576px) {
+    padding: 0 2rem;
+  }
+
+}
+
+.cont {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text {
+  font-size: .9rem;
+  text-align: center;
+
+  @media not all and (min-width: 576px) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.img {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.back {
+  color: rgb(167, 139, 250);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

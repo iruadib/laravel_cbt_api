@@ -1,0 +1,200 @@
+// Font Sizes
+$mf-font-size: 1rem !default;
+$mf-active-font-size: $mf-font-size * 0.8 !default;
+$mf-active-top: -$mf-font-size !default;
+
+// Margin & Paddings
+$mf-gap: $mf-font-size * 1.5 !default;
+$mf-spacer: $mf-font-size / 8 !default;
+$mf-fieldset-margin: 0 0 $mf-gap * 2 !default;
+$mf-checkbox-gap: $mf-font-size * 2 !default;
+$mf-checkbox-top: 0 !default;
+$mf-radio-margin: $mf-font-size / -4 !default;
+
+// Colors
+$mf-input-color: #333 !default;
+$mf-border-color: #999 !default;
+$mf-label-color: lighten($mf-border-color, 10%) !default;
+$mf-active-color: darken($mf-border-color, 2.5%) !default;
+$mf-focus-color: rgb(167, 139, 250) !default;
+$mf-error-color: #d9534f !default;
+
+// Animation
+$mf-transition-speed: 0.28s !default;
+
+.cont {
+  position: relative;
+	margin-top: ($mf-gap * 1);
+	margin-bottom: ($mf-gap * 1);
+  vertical-align: baseline;
+  align-items: stretch;
+  display: flex;
+
+  .form {
+    opacity: .5;
+    padding-right: .25rem;
+    margin: 0;
+  }
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+}
+
+.subcont {
+  position: relative;
+  
+	.input {
+		height: ($mf-font-size * 1.9);
+    width: auto;
+
+    &[type="password"] {
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: "Hello";
+      }
+    }
+	}
+
+  .eye {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    text-decoration: none;
+    opacity: .4;
+    z-index: 30;
+    transition: opacity .2s ease;
+
+    &:hover {
+      opacity: .6;
+    }
+
+    &:focus, &:focus-within {
+      opacity: .8;
+    }
+  }
+
+	.textarea {
+		resize: none;
+	}
+
+	.control-label {
+		position: absolute;
+		top: ($mf-font-size / 4);
+		left: 0;
+		pointer-events: none;
+		padding-left: $mf-spacer;
+		z-index: 1;
+		color: $mf-label-color;
+		font-size: $mf-font-size;
+		font-weight: normal;
+		transition: all $mf-transition-speed ease;
+	}
+	
+	.input-error {
+		font-size: $mf-active-font-size;
+		margin-top: .25rem;
+		color: $mf-error-color;
+		top: $mf-active-top;
+		left: 0;
+		display: block;
+	}
+
+	.bar {
+		position: relative;
+		border-bottom: ($mf-font-size / 16) solid $mf-border-color;
+		display: block;
+		
+		&::before {
+			content: '';
+			height: ($mf-font-size / 8);
+			width: 0;
+			left: 50%;
+			bottom: ($mf-font-size / -16);
+			position: absolute;
+			background: $mf-focus-color;
+			transition: left $mf-transition-speed ease, width $mf-transition-speed ease;
+			z-index: 2;
+		}
+	}
+
+	.input,
+	.textarea {
+		display: block;
+		background: none;
+		padding: $mf-spacer $mf-spacer ($mf-spacer / 2);
+		font-size: $mf-font-size;
+		border-width: 0;
+		border-color: transparent;
+		line-height: 1.9;
+		width: 100%;
+		color: transparent;
+		transition: ($mf-transition-speed + .4) ease;
+		box-shadow: none;
+    &::placeholder {
+      opacity: 0;
+    }
+		&:focus {
+      &::placeholder {
+        opacity: .5;
+      }
+		}
+	}
+
+	.input[type="file"] {
+		line-height: 1;
+
+		~ .bar {
+			display: none;
+		}
+	}
+	
+	input:invalid {
+		~ .input-error {
+			display: block;
+		}
+	}
+	
+	.select,
+	.input:focus,
+	.input:valid,
+	.input.form-file,
+	.input.has-value,
+	.textarea:focus,
+	.textarea:valid,
+	.textarea.form-file,
+	.textarea.has-value {
+		color: $mf-input-color;
+
+		~ .control-label {
+			font-size: $mf-active-font-size;
+			color: $mf-active-color;
+			top: $mf-active-top;
+			left: 0;
+		}
+	}
+
+	.select,
+	.input,
+	.textarea {
+		&:focus {
+			outline: none;
+
+			~ .control-label {
+				color: $mf-focus-color;
+			}
+
+			~ .bar {
+				&::before {
+					width: 100%;
+					left: 0;
+				}
+			}
+		}
+	}
+}

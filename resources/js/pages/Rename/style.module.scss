@@ -1,0 +1,97 @@
+.parent {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+
+  a {
+    text-decoration: none;
+  }
+
+  .modal {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    text-align: center !important;
+    transform: translate(-50%, -50%);
+
+    @media not all and (min-width: 576px) {
+      position: relative;
+      top: 0; left: 0;
+      transform: none;
+    }
+  }
+  .card {
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid #eceef3;
+    border-radius: .75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0 , 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+  .title {
+    text-transform: lowercase;
+    margin-bottom: 1.5rem;
+    text-align: center !important;
+  }
+  .txt {
+    border: 1px dashed rgb(107, 114, 128);
+    border-radius: .5rem;
+    padding: 1rem;
+    margin-bottom: .5rem;
+
+    span {
+      color: rgb(167, 139, 250);
+    }
+
+  }
+  .btn {
+    cursor: pointer;
+    line-height: inherit !important;
+    position: relative;
+    font-size: 1rem;
+    background: transparent;
+    text-transform: lowercase;
+    font-family: inherit;
+    padding: .4rem .75rem;
+    border: 0;
+    border: .75px solid rgba(167, 139, 250, .3);
+    border-radius: .4rem;
+    transition: .2s ease;
+    color: rgb(167, 139, 250);
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    margin-top: .5rem;
+    text-align: center !important;
+
+    &:hover, &:focus-within {
+      background: rgba(167, 139, 250, .1);
+      border: .75px solid rgba(167, 139, 250, .5);
+    }
+    &:focus {
+      background: rgba(167, 139, 250, .2);
+    }
+  }
+  .loading {
+    margin: 1rem 0 0 0;
+    text-align: center !important;
+  }
+  .msg {
+    text-align: center !important;
+    margin: 1rem 0 0 0;
+    color: rgb(167, 139, 250);
+  }
+  .error {
+    text-align: center !important;
+    margin: 1rem 0 0 0;
+    color: rgb(239, 68, 68);
+  }
+}
