@@ -1,3 +1,8 @@
-## About This Project
+# Projek Penyimpanan File Berbasis Website
 
-This project is powered by React as the front end and Laravel as the backend.
+Bismillahirrahmanirrahim...\
+Alhamdulillah, atas izin Allah SWT. proyek ini berhasil diselesaikan tanpa kurang sedikitpun.
+
+Adapun semua orang yang terlibat dalam project ini antara lain : 
+* [Khorirul Adib F.](https://github.com/iruadib)
+* [Muhammad Haidar](https://github.com/cutiepandaa)
