@@ -107,7 +107,6 @@ const UploadImage = ({ handleClose, open,  handleImg }) => {
       if (err.response.status == 400) {
         setProgress(99);
         return setErrors(err.response.data.profile);
-        // return console.log(err.response);
       } 
       return setErrors(['Something went wrong, please try again!']);
     });

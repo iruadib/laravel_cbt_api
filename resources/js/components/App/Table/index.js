@@ -35,7 +35,6 @@ const Table = ({ id }) => {
         if (err.response.status === 401) {
           setError("Something went wrong, please refresh your tab!");
         }
-        // console.log(err.response);
       });
     }
 
@@ -59,7 +58,6 @@ const Table = ({ id }) => {
         if (err.response.status === 401) {
           setError("Something went wrong, please refresh your tab!");
         }
-        // console.log(err.response);
       });
     }
 

@@ -41,7 +41,6 @@ const Router = () => {
       return config;
     });
     axios.get('/api/auth').then(res => {
-      // console.log(res.data);
       if (res.status === 200) {
         setId(res.data.uuid);
         setAuth(true);

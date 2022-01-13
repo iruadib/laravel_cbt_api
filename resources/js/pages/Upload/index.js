@@ -56,7 +56,6 @@ const Upload = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // console.log(e.dataTransfer.files[0]);
     setError("");
     if (e.dataTransfer.files[0]) {
       if (fileName.length < 4 && file.length < 4) {
@@ -85,7 +84,6 @@ const Upload = () => {
     file.forEach((data, i) => {
       formData.append(`file-${i + 1}`, data);
     });
-    // console.log(formData.values);
     setMsg("");
     setError("");
     setProgress(0);
@@ -98,19 +96,14 @@ const Upload = () => {
         setProgress( progress < 100 ? progress : 99);
       }
     }).then(res => {
-      // console.log(res.data);
       setProgress(100);
       setMsg("File saved!");
     }).catch(err => {
       fileProgress.current.classList.add(styles.hide);
       setProgress(0);
-      // console.log(err.response.data.message);
       setError(err.response.data.message);
     });
   }
-  // useEffect(() => {
-  //   console.log(progress);
-  // }, [progress]);
   return (
     <div className={styles.parent}>
       <form action={`/${String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now() + (Math.random() * 901)}`} method="post" onSubmit={handleSubmit}>

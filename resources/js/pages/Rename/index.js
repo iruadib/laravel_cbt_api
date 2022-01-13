@@ -42,10 +42,8 @@ const Rename = () => {
         axios.put('/api/file', form).then(res => {
           setLoading(false);
           setMsg(res.data.message);
-          // console.log(res.data);
         }).catch(err => {
           setLoading(false);
-          // console.log(err.response);
           if (err.response.status !== 400) {
             if (err.response.status !== 500) {
               return setErr(err.response.data.message);

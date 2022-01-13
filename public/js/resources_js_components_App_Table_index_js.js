@@ -107,7 +107,6 @@ var Table = function Table(_ref) {
 
         if (err.response.status === 401) {
           setError("Something went wrong, please refresh your tab!");
-        } // console.log(err.response);
 
       });
     }
@@ -136,8 +135,7 @@ var Table = function Table(_ref) {
 
         if (err.response.status === 401) {
           setError("Something went wrong, please refresh your tab!");
-        } // console.log(err.response);
-
+        } 
       });
     }
 

@@ -33,7 +33,6 @@ const Profile = ({ handleOpen, img, handleImg }) => {
       return config;
     });
     axios.post('/api/logout').then(res => {
-      // console.log(res.data);
       if (res.status === 200) {
         Cookies.remove('access_token', { expires: 7, sameSite: 'Strict' });
         window.location.replace('/login');
@@ -48,7 +47,6 @@ const Profile = ({ handleOpen, img, handleImg }) => {
       setName(res.data.name);
       return handleImg(res.data.message);
     }).catch(err => {
-      // console.log(err.response);
       if (err.response.status === 404) {
         setName(err.response.data.name);
         return handleImg("default.png");

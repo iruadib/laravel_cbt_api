@@ -12,7 +12,6 @@ const LogoutBtn = ({ auth }) => {
       return config;
     });
     axios.post('/api/logout').then(res => {
-      // console.log(res.data);
       if (res.status === 200) {
         setMsg("Success!");
         Cookies.remove('access_token', { expires: 7 });
