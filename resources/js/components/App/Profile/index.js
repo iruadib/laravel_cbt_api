@@ -51,7 +51,7 @@ const Profile = ({ handleOpen, img, handleImg }) => {
       // console.log(err.response);
       if (err.response.status === 404) {
         setName(err.response.data.name);
-        return handleImg("default.jpg");
+        return handleImg("default.png");
       }
     });
 
@@ -64,7 +64,7 @@ const Profile = ({ handleOpen, img, handleImg }) => {
     setErrors([]);
     setMsg("");
     axios.delete('/api/profile').then(res => {
-      handleImg('default.jpg');
+      handleImg('default.png');
       setMsg("Image has been deleted!");
     }).catch(err => {
       setErrors([err.response.data.message]);
