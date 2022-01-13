@@ -46,7 +46,7 @@ const Signup = () => {
         if (res.status === 200) {
           setLoading(false);
           setMsg("Success!");
-          Cookies.set('access_token', res.data.access_token, { expires: 7, sameSite: 'Strict' });
+          Cookies.set('access_token', res.data.access_token, { expires: 1, sameSite: 'Strict' });
           window.location.replace('/');
         }
       }).catch(err => {

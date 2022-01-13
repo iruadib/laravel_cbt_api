@@ -31,7 +31,7 @@ class AuthController extends Controller
    ]);
 
     $token = $user->createToken('auth_token')->plainTextToken;
-    $cookie = Cookie::make('user_id', $user->uuid, 60 * 24 * 24, null, null, null, true, false, 'Strict');
+    $cookie = Cookie::make('user_id', $user->uuid, 60 * 24 * 1, null, null, null, true, false, 'Strict');
     return response()->json(['id' => $user->uuid, 'access_token' => $token, 'token_type' => 'Bearer'], 200)->withCookie($cookie);
   }
   public function login(Request $request) {
@@ -49,7 +49,7 @@ class AuthController extends Controller
       return response()->json(['message'=>'Unauthorized!'], 401);
     }
     $token = $user->createToken('auth_token')->plainTextToken;
-    $cookie = Cookie::make('user_id', $user->uuid, 60 * 24 * 24, null, null, null, true, false, 'Strict');
+    $cookie = Cookie::make('user_id', $user->uuid, 60 * 24 * 1, null, null, null, true, false, 'Strict');
     return response()->json(['id' => $user->uuid, 'access_token' => $token, 'token_type' => 'Bearer'])->withCookie($cookie);
   }
 

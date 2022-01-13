@@ -1,0 +1,126 @@
+.navbar {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  z-index: 99;
+  height: auto;
+  max-height: 0;
+  transform: translate(0, -5rem);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-out, height .5s ease-in-out, background .3s .3s ease-in-out, transform .5s ease-in-out, max-height .5s ease-in-out, box-shadow .5s ease-in-out, padding .5s ease-in-out;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  &.present {
+    opacity: .9;
+    background: #fff;
+    max-height: 20rem;
+    transform: translate(0, 0);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.cont {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+    
+  ul {
+    display: flex;
+    list-style-type: none;
+    height: 100%;
+    &:first-of-type {
+      margin: auto auto auto 0;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      @media not all and (min-width: 990px) {
+        display: none;
+      }
+      li {
+        height: 100%;
+        a {
+          color: black;
+          font-size: 1.15rem;
+          height: 100%;
+          position: relative;
+          text-decoration: none;
+          display: block;
+          padding: 1.25rem 0;
+          text-decoration: none;
+          @media not all and (min-width: 1100px) {
+            font-size: .9rem;
+          }
+        }
+      }
+    }
+    &:last-of-type {
+      padding: 0 40px 0 0;
+      margin: auto 0 auto auto;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      transition: margin-right .3s ease;
+      @media not all and (min-width: 1100px) {
+        margin-right: auto;
+      }
+      li {
+        height: 100%;
+        margin-right: .75rem;
+        a {
+          color: rgba(0, 0, 0, .7);
+          height: 100%;
+          padding: 1.25rem 0;
+          font-size: .85rem;
+          position: relative;
+          text-decoration: none;
+          display: block;
+
+          &.active {
+            color: black;
+            &::before {
+              height: 3px;
+            }
+          }
+          &:hover {
+            color: black;
+            &::before {
+              height: 3px;
+            }
+          }
+          &::before {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 0;
+            transition: height .2s ease;
+            content: "";
+            background: rgb(167, 139, 250);
+            border-radius: .5rem;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            @media not all and (min-width: 990px) {
+              bottom: 0px;
+            }
+          }
+          @media not all and (min-width: 1100px) {
+            font-size: .7rem;
+          }
+          @media not all and (min-width: 990px) {
+            font-size: .8rem;
+          }
+        }
+      }
+    }
+  }
+}
