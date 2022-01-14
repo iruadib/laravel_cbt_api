@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from './style.module.scss';
 import components from '../../components.module.scss';
 import axios from "axios";
@@ -9,6 +9,7 @@ const Profile = ({ handleOpen, img, handleImg }) => {
   const [msg, setMsg] = useState("");
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (msg) {
@@ -35,7 +36,7 @@ const Profile = ({ handleOpen, img, handleImg }) => {
     axios.post('/api/logout').then(res => {
       if (res.status === 200) {
         Cookies.remove('access_token', { expires: 7, sameSite: 'Strict' });
-        window.location.replace('/login');
+        navigate('/login', { replace: true });
       }
     }).catch(err => {
       setErrors(["Failed!"]);

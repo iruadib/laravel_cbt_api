@@ -10,7 +10,6 @@ import NotFound from './NotFound/index';
 import Rename from "./Rename";
 import Signup from "./Signup";
 import Upload from "./Upload";
-import styles from './style.module.scss';
 import Navbar from "../components/Navbar";
 
 const AuthRoutesHandler = () => {
@@ -31,6 +30,14 @@ const AuthRoutesHandler = () => {
 const Router = () => {
   const [auth, setAuth] = useState(false);
   const [id, setId] = useState("");
+
+  const handleAuth = (auth) => {
+    setAuth(auth);
+  }
+
+  const handleId = (id) => {
+    setId(id);
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -55,19 +62,17 @@ const Router = () => {
   }, []);
   return (
     <BrowserRouter>
-        {auth &&
-          <Navbar />
-        }
-        <Routes>
-          <Route path="/" element={auth ? <App id={id} /> : <Navigate to="/login" />} />
-          <Route path="/login" element={auth ? <AuthRoutesHandler /> : <Login />} />
-          <Route path="/signup" element={auth ? <AuthRoutesHandler /> : <Signup />} />
-          <Route path="/upload" element={auth ? <Upload /> : <Navigate to="/login" />} />
-          <Route path="/delete" element={auth ? <Delete /> : <Navigate to="/login" />} />
-          <Route path="/rename" element={auth ? <Rename /> : <Navigate to="/login" />} />
-          <Route path="/beta" element={auth ? <Beta /> : <Navigate to="/login" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+      <Navbar handleAuth={handleAuth} handleId={handleId} auth={auth} />
+      <Routes>
+        <Route path="/" element={auth ? <App id={id} /> : <Navigate to="/login" />} />
+        <Route path="/login" element={auth ? <AuthRoutesHandler /> : <Login />} />
+        <Route path="/signup" element={auth ? <AuthRoutesHandler /> : <Signup />} />
+        <Route path="/upload" element={auth ? <Upload /> : <Navigate to="/login" />} />
+        <Route path="/delete" element={auth ? <Delete /> : <Navigate to="/login" />} />
+        <Route path="/rename" element={auth ? <Rename /> : <Navigate to="/login" />} />
+        <Route path="/beta" element={auth ? <Beta /> : <Navigate to="/login" />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </BrowserRouter>
   )
 }

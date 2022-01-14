@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import styles from './style.module.scss';
 import components from '../../components/components.module.scss';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -14,6 +14,7 @@ const Signup = () => {
   const [error, setError] = useState({});
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
@@ -47,7 +48,7 @@ const Signup = () => {
           setLoading(false);
           setMsg("Success!");
           Cookies.set('access_token', res.data.access_token, { expires: 1, sameSite: 'Strict' });
-          window.location.replace('/');
+          navigate('/', { replace: true });
         }
       }).catch(err => {
         setLoading(false);
