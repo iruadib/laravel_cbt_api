@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styles from './style.module.scss';
 import components from '../components.module.scss';
 
@@ -38,7 +38,7 @@ const Input = ({ type, icon, className, error, placeholder, ...props }) => {
               <input type={type} className={`${styles.input} ${components['col-12']} ${className}`} placeholder={placeholder} {...props} />
               <label className={styles["control-label"]} htmlFor="input">{placeholder}</label>
               <i className={styles.bar}></i>
-              <span className={styles["input-error"]}>{Array.isArray(error) ? error.map((msg) => (<>{msg}</>)) : error}</span>
+              <span className={styles["input-error"]}>{Array.isArray(error) ? error.map((msg, i) => (<Fragment key={i}>{msg}</Fragment>)) : error}</span>
             </div>
           </> :
           <>
@@ -46,7 +46,14 @@ const Input = ({ type, icon, className, error, placeholder, ...props }) => {
               <input type={type} className={`${styles.input} ${components['col-12']} ${className}`} placeholder={placeholder} {...props} />
               <label className={styles["control-label"]} htmlFor="input">{placeholder}</label>
               <i className={styles.bar}></i>
-              <span className={styles["input-error"]}>{Array.isArray(error) ? error.map((msg) => (<>{msg}</>)) : error}</span>
+              <span className={styles["input-error"]}>
+                {
+                  Array.isArray(error) ? error.map((msg, i) => (
+                  <Fragment key={i}>{msg}</Fragment>)
+                  ) : 
+                  error
+                }
+              </span>
             </div>
           </>
         }

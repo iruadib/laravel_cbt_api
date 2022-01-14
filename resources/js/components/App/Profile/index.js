@@ -24,24 +24,6 @@ const Profile = ({ handleOpen, img, handleImg }) => {
     }
   }, [msg, errors]);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    setMsg("");
-    axios.interceptors.request.use((config) => {
-      const token = Cookies.get('access_token');
-      config.headers.Authorization = token && `Bearer ${token}`;
-      return config;
-    });
-    axios.post('/api/logout').then(res => {
-      if (res.status === 200) {
-        Cookies.remove('access_token', { expires: 7, sameSite: 'Strict' });
-        navigate('/login', { replace: true });
-      }
-    }).catch(err => {
-      setErrors(["Failed!"]);
-    });
-  }
   useEffect(() => {
     const controller = new AbortController();
     axios.get('/api/profile').then(res => {

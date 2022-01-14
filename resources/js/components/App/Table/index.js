@@ -19,11 +19,12 @@ const Table = ({ id }) => {
   }
 
   useEffect(() => {
-    const controller = new AbortController();
-    
+    const cancelTokenSource = axios.CancelToken.source();
     if (click) {
       setLoading(true);
-      axios.get(`/api/view?page=${page}&skip=3`).then(res => {
+      axios.get(`/api/view?page=${page}&skip=3`, {
+        cancelToken: cancelTokenSource.token
+      }).then(res => {
         setFiles(prev => [...prev, ...res.data]);
         setMore(res.data.length > 0 && (res.data.length < 3 ? false : true));
         setPage(prev => prev + 1);
@@ -32,38 +33,35 @@ const Table = ({ id }) => {
       }).catch(err => {
         setClick(false);
         setLoading(false);
-        if (err.response.status === 401) {
+        if (err.response?.status === 401) {
           setError("Something went wrong, please refresh your tab!");
         }
       });
     }
 
     return () => {
-      controller.abort();
+      cancelTokenSource.cancel();
     }
   }, [click]);
   useEffect(() => {
-    let isMounted = true;
+    const cancelTokenSource = axios.CancelToken.source();
+    axios.get(`/api/view?page=${page}&skip=3`, {
+      cancelToken: cancelTokenSource.token,
+    }).then(res => {
+      setFiles(prev => [...prev, ...res.data]);
+      setMore(res.data.length > 0 && (res.data.length < 3 ? false : true));
+      setLoading(false);
+      setPage(prev => prev + 1);
+      setClick(false);
+    }).catch(err => {
+      setClick(false);
+      setLoading(false);
+      if (err.response?.status === 401) {
+        setError("Something went wrong, please refresh your tab!");
+      }
+    });
 
-    if (isMounted) {
-      axios.get(`/api/view?page=${page}&skip=3`).then(res => {
-        setFiles(prev => [...prev, ...res.data]);
-        setMore(res.data.length > 0 && (res.data.length < 3 ? false : true));
-        setLoading(false);
-        setPage(prev => prev + 1);
-        setClick(false);
-      }).catch(err => {
-        setClick(false);
-        setLoading(false);
-        if (err.response.status === 401) {
-          setError("Something went wrong, please refresh your tab!");
-        }
-      });
-    }
-
-    return () => {
-      isMounted = false;
-    }
+   return () => cancelTokenSource.cancel();
   }, []);
   return (
     <div className={styles.parent}>

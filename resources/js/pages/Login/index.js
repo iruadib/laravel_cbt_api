@@ -119,7 +119,7 @@ const Login = () => {
               </button>
             </div>
             <div className={styles['form-alt']}>
-              <span>Don't have an account? <Link className="" to="/signup">Sign up</Link></span>
+              <span>Don't have an account? <Link className={styles.alt} to="/signup">Sign up</Link></span>
             </div>
             {loading &&
               <p className={styles.loading}>Loading...</p>

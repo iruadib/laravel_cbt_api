@@ -4,6 +4,7 @@ import Input from "../../components/Input";
 import styles from './style.module.scss';
 import components from '../../components/components.module.scss';
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -86,7 +87,7 @@ const Signup = () => {
           <p className={styles.title}>
             Register your account
           </p>
-          <form className={components['col-12']} onSubmit={handleSubmit} autocomplete="off">
+          <form className={components['col-12']} onSubmit={handleSubmit} autoComplete="off">
             <Input 
               type="text" 
               onChange={e => setName(e.currentTarget.value)} 
@@ -127,7 +128,7 @@ const Signup = () => {
               </button>
             </div>
             <div className={styles['form-alt']}>
-              <span>Already have an account? <Link className="" to="/login">Log in</Link></span>
+              <span>Already have an account? <Link className={styles.alt} to="/login">Log in</Link></span>
             </div>
             {loading &&
               <p className={styles.loading}>Loading...</p>

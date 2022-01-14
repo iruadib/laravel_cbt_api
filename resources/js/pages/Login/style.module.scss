@@ -110,12 +110,15 @@
     text-align: center;
     color: rgb(31, 41, 55);
 
+    .alt {
+      color: rgb(167, 139, 250);
+    }
+
     a {
       text-decoration: none;
 
       &:hover {
         text-decoration: underline;
-        color: rgb(107, 114, 128);
       }
     }
   }
@@ -151,6 +154,7 @@
   color: white;
   background: rgb(167, 139, 250);
   cursor: pointer;
+  transition: .25s ease;
 
   &:hover {
     background: rgb(124, 58, 237);

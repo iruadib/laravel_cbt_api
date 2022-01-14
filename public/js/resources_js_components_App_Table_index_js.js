@@ -87,11 +87,13 @@ var Table = function Table(_ref) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var controller = new AbortController();
+    var cancelTokenSource = axios__WEBPACK_IMPORTED_MODULE_0___default().CancelToken.source();
 
     if (click) {
       setLoading(true);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/view?page=".concat(page, "&skip=3")).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/view?page=".concat(page, "&skip=3"), {
+        cancelToken: cancelTokenSource.token
+      }).then(function (res) {
         setFiles(function (prev) {
           return [].concat(_toConsumableArray(prev), _toConsumableArray(res.data));
         });
@@ -102,45 +104,47 @@ var Table = function Table(_ref) {
         setLoading(false);
         setClick(false);
       })["catch"](function (err) {
+        var _err$response;
+
         setClick(false);
         setLoading(false);
 
-        if (err.response.status === 401) {
+        if (((_err$response = err.response) === null || _err$response === void 0 ? void 0 : _err$response.status) === 401) {
           setError("Something went wrong, please refresh your tab!");
         }
       });
     }
 
     return function () {
-      controller.abort();
+      cancelTokenSource.cancel();
     };
   }, [click]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var isMounted = true;
-
-    if (isMounted) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/view?page=".concat(page, "&skip=3")).then(function (res) {
-        setFiles(function (prev) {
-          return [].concat(_toConsumableArray(prev), _toConsumableArray(res.data));
-        });
-        setMore(res.data.length > 0 && (res.data.length < 3 ? false : true));
-        setLoading(false);
-        setPage(function (prev) {
-          return prev + 1;
-        });
-        setClick(false);
-      })["catch"](function (err) {
-        setClick(false);
-        setLoading(false);
-
-        if (err.response.status === 401) {
-          setError("Something went wrong, please refresh your tab!");
-        }
+    var cancelTokenSource = axios__WEBPACK_IMPORTED_MODULE_0___default().CancelToken.source();
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/view?page=".concat(page, "&skip=3"), {
+      cancelToken: cancelTokenSource.token
+    }).then(function (res) {
+      setFiles(function (prev) {
+        return [].concat(_toConsumableArray(prev), _toConsumableArray(res.data));
       });
-    }
+      setMore(res.data.length > 0 && (res.data.length < 3 ? false : true));
+      setLoading(false);
+      setPage(function (prev) {
+        return prev + 1;
+      });
+      setClick(false);
+    })["catch"](function (err) {
+      var _err$response2;
 
+      setClick(false);
+      setLoading(false);
+
+      if (((_err$response2 = err.response) === null || _err$response2 === void 0 ? void 0 : _err$response2.status) === 401) {
+        setError("Something went wrong, please refresh your tab!");
+      }
+    });
     return function () {
-      isMounted = false;
+      return cancelTokenSource.cancel();
     };
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
