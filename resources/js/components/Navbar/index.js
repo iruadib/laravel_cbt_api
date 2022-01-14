@@ -4,14 +4,14 @@ import { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styles from './style.module.scss';
 
-const Navbar = ({ handleAuth, handleId, auth }) => {
+const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
   const location = useLocation();
-  const navBar = useRef(null);
+  const navBarRef = useRef(null);
   window.onscroll = () => {
     if (document.body.scrollTop > 55 || document.documentElement.scrollTop > 55) {
-      navBar.current.classList.add(styles.present);
+      navBarRef.current.classList.add(styles.shadow);
     } else {
-      navBar.current.classList.remove(styles.present);
+      navBarRef.current.classList.remove(styles.shadow);
     }
   }
   useEffect(() => {
@@ -35,29 +35,37 @@ const Navbar = ({ handleAuth, handleId, auth }) => {
     return () => controller.abort();
   }, [location]);
   return (
-    auth && (
-      <div className={styles.navbar} ref={navBar}>
-        <div className={styles.cont}>
-            <ul>
-              <li><a href="#">ヴァイオレット・エヴァーガーデン</a></li>
-            </ul>
-            <ul>
-              <li>
-                <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/upload">Upload</NavLink>
-              </li>
-              <li>
-                <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/rename">Rename</NavLink>
-              </li>
-              <li>
-                <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/delete">Delete</NavLink>
-              </li>
-            </ul>
-        </div>
+    <div className={`${styles.navbar} ${styles.present}`} ref={node => { innerRef.current = node, navBarRef.current = node }}>
+      <div className={styles.cont}>
+          <ul>
+            <li><a href="#">ヴァイオレット・エヴァーガーデン</a></li>
+          </ul>
+          <ul>
+            {auth ?
+              <>
+                <li>
+                  <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/">Home</NavLink>
+                </li>
+                <li>
+                  <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/upload">Upload</NavLink>
+                </li>
+                <li>
+                  <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/logout">Logout</NavLink>
+                </li>
+              </> :
+              <>
+                <li>
+                  <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/signup">Signup</NavLink>
+                </li>
+                <li>
+                  <NavLink className={({ isActive }) => isActive ? styles.active : ''} end to="/login">Login</NavLink>
+                </li>
+              </>
+            }
+            
+          </ul>
       </div>
-    )
+    </div>
   );
 }
 

@@ -87,9 +87,7 @@ const Profile = ({ handleOpen, img, handleImg }) => {
         <span>{name}</span>
       </div>
       <div className={`${styles.action} ${components['col-12']}`}>
-        <Link to="/logout" className={styles.btn} onClick={handleLogout} >Logout</Link>
-        <Link to="/delete" className={styles.btn} onClick={handleDelete} >Delete Photo</Link>
-        <Link to="/upload" className={styles.btn}>Upload File</Link>
+        <Link to="/delete" className={styles.btn} onClick={handleDelete} >Delete Profile</Link>
       </div>
       {msg && 
         <p className={styles.msg}>{msg}</p>

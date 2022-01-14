@@ -1,6 +1,4 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import App from './App/index';
 import Beta from "./Beta";
@@ -11,6 +9,7 @@ import Rename from "./Rename";
 import Signup from "./Signup";
 import Upload from "./Upload";
 import Navbar from "../components/Navbar";
+import styles from './router.module.scss';
 
 const AuthRoutesHandler = () => {
   const navigate = useNavigate();
@@ -30,6 +29,8 @@ const AuthRoutesHandler = () => {
 const Router = () => {
   const [auth, setAuth] = useState(false);
   const [id, setId] = useState("");
+  const navBarRef = useRef(null);
+  const contRef = useRef(null);
 
   const handleAuth = (auth) => {
     setAuth(auth);
@@ -38,41 +39,25 @@ const Router = () => {
   const handleId = (id) => {
     setId(id);
   }
-
   useEffect(() => {
-    const controller = new AbortController();
-
-    axios.interceptors.request.use((config) => {
-      let token = Cookies.get('access_token');
-      config.headers.Authorization = token && `Bearer ${token}`;
-      return config;
-    });
-    axios.get('/api/auth').then(res => {
-      if (res.status === 200) {
-        setId(res.data.uuid);
-        setAuth(true);
-      }
-    }).catch(err => {
-      setAuth(false);
-    });
-
-    return () => {
-      controller.abort();
-    }
+    const height = navBarRef.current.offsetHeight;
+    contRef.current.style.top = `${height}px`;
   }, []);
   return (
     <BrowserRouter>
-      <Navbar handleAuth={handleAuth} handleId={handleId} auth={auth} />
-      <Routes>
-        <Route path="/" element={auth ? <App id={id} /> : <Navigate to="/login" />} />
-        <Route path="/login" element={auth ? <AuthRoutesHandler /> : <Login />} />
-        <Route path="/signup" element={auth ? <AuthRoutesHandler /> : <Signup />} />
-        <Route path="/upload" element={auth ? <Upload /> : <Navigate to="/login" />} />
-        <Route path="/delete" element={auth ? <Delete /> : <Navigate to="/login" />} />
-        <Route path="/rename" element={auth ? <Rename /> : <Navigate to="/login" />} />
-        <Route path="/beta" element={auth ? <Beta /> : <Navigate to="/login" />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Navbar handleAuth={handleAuth} handleId={handleId} auth={auth} innerRef={navBarRef} />
+      <div className={styles.wrapper} ref={contRef}>
+        <Routes>
+          <Route path="/" element={auth ? <App id={id} /> : <Navigate to="/login" />} />
+          <Route path="/login" element={auth ? <AuthRoutesHandler /> : <Login />} />
+          <Route path="/signup" element={auth ? <AuthRoutesHandler /> : <Signup />} />
+          <Route path="/upload" element={auth ? <Upload /> : <Navigate to="/login" />} />
+          <Route path="/delete" element={auth ? <Delete /> : <Navigate to="/login" />} />
+          <Route path="/rename" element={auth ? <Rename /> : <Navigate to="/login" />} />
+          <Route path="/beta" element={auth ? <Beta /> : <Navigate to="/login" />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }

@@ -12,14 +12,17 @@
   transform: translate(0, -5rem);
   overflow: hidden;
   opacity: 0;
-  transition: opacity .5s ease-out, height .5s ease-in-out, background .3s .3s ease-in-out, transform .5s ease-in-out, max-height .5s ease-in-out, box-shadow .5s ease-in-out, padding .5s ease-in-out;
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: border .5s ease-in-out, opacity .5s ease-out, height .5s ease-in-out, background .3s .3s ease-in-out, transform .5s ease-in-out, max-height .5s ease-in-out, box-shadow .5s ease-in-out, padding .5s ease-in-out;
 
   &.present {
     opacity: .9;
     background: #fff;
     max-height: 20rem;
     transform: translate(0, 0);
+    border-bottom: .75px solid rgba(0, 0, 0, .05);
+  }
+  &.shadow {
+    border-bottom-width: 0;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 }
@@ -72,6 +75,9 @@
       transition: margin-right .3s ease;
       @media not all and (min-width: 1100px) {
         margin-right: auto;
+      }
+      @media not all and (min-width: 990px) {
+        padding: 0;
       }
       li {
         height: 100%;
