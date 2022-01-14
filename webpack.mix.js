@@ -13,13 +13,21 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
 .react()
-.sass('resources/css/app.scss', 'public/css')
-.sass('resources/css/noscript.scss', 'public/css')
+.sass('resources/css/app.scss', 'public/css/style.min.css')
+.sass('resources/css/noscript.scss', 'public/css/noscript.min.css')
   .options({
     autoprefixer: {
       options: {
         browsers: [
-          'last 6 versions',
+          "defaults",
+          "not ie < 11",
+          "last 2 major versions",
+          "last 2 Chrome versions",
+          "not dead",
+          "> 1%",
+          "iOS 7",
+          "last 2 iOS versions",
+          "Firefox ESR"
         ]
       }
     }

@@ -19,12 +19,12 @@
     !function (e) { function r(r) { for (var n, l, f = r[0], i = r[1], a = r[2], c = 0, s = []; c < f.length; c++) { l = f[c], Object.prototype.hasOwnProperty.call(o, l) && o[l] && s.push(o[l[0]]), o[l] = 0; }}};
   </script>
   <script src="{{ asset('/js/app.js') }}" defer></script>
-  <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/style.min.css') }}">
 </head>
 <body>
   <div id="app">
     <noscript>
-      <link rel="stylesheet" href="{{ asset('/css/noscript.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/noscript.min.css') }}">
       <div class="backdrop">
         <div class="modal">
           <div class="cont">

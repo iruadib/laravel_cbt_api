@@ -10,6 +10,7 @@ use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class FileUpload extends Controller
 {
@@ -70,15 +71,16 @@ class FileUpload extends Controller
       if ($request->hasFile('file-1')) {
         $firstFileName = pathinfo($request->file('file-1')->getClientOriginalName(), PATHINFO_FILENAME);
         $findFirstFile = File::where('name', $firstFileName)->first();
+        $firstRandom = Str::random(40);
         if (!$findFirstFile) {
           $file = File::Create([
-            'title' => $request->file('file-1')->hashName(),
+            'title' => $firstRandom.'-'.$user->uuid.'.'.$request->file('file-1')->extension(),
             'name' => $firstFileName,
             'owner' => $user->name,
             'owner_id' => $user->uuid,
             'ext' => $request->file('file-1')->extension(),
           ]);
-          $path = $request->file('file-1')->storeAs('private', $request->file('file-1')->hashName());
+          $path = $request->file('file-1')->storeAs('private', $firstRandom.'-'.$user->uuid.'.'.$request->file('file-1')->extension());
         } else {
           return response()->json(['message'=>'First file already exists, therefore the second and third file might not be saved!'], 400);
         }
@@ -86,15 +88,16 @@ class FileUpload extends Controller
         if ($request->hasFile('file-2')) {
           $secondFileName = pathinfo($request->file('file-2')->getClientOriginalName(), PATHINFO_FILENAME);
           $findSecondFile = File::where('title', $secondFileName)->first();
+          $secondRandom = Str::random(40);
           if (!$findSecondFile) {
             $file = File::Create([
-              'title' => $request->file('file-2')->hashName(),
+              'title' => $secondRandom.'-'.$user->uuid.'.'.$request->file('file-2')->extension(),
               'name'=> $secondFileName,
               'owner' => $user->name,
               'owner_id' => $user->uuid,
               'ext' => $request->file('file-2')->extension(),
             ]);
-            $path = $request->file('file-2')->storeAs('private', $request->file('file-2')->hashName());
+            $path = $request->file('file-2')->storeAs('private', $secondRandom.'-'.$user->uuid.'.'.$request->file('file-2')->extension());
           } else {
             return response()->json(['message'=>'Second file already exists and the third file might not be saved!'], 400);
           }
@@ -103,15 +106,16 @@ class FileUpload extends Controller
           if ($request->hasFIle('file-3')) {
             $thirdFileName = pathinfo($request->file('file-3')->getClientOriginalName(), PATHINFO_FILENAME);
             $findThirdFile = File::where('title', $request->file('file-3')->getClientOriginalName())->first();
+            $thirdRandom = Str::random(40);
             if (!$findThirdFile) {
               $file = File::Create([
-                'title' => $request->file('file-3')->hashName(),
+                'title' => $thirdRandom.'-'.$user->uuid.'.'.$request->file('file-3')->extension(),
                 'name' => $thirdFileName,
                 'owner' => $user->name,
                 'owner_id' => $user->uuid,
                 'ext' => $request->file('file-3')->extension(),
               ]);
-              $path = $request->file('file-3')->storeAs('private', $request->file('file-3')->hashName());
+              $path = $request->file('file-3')->storeAs('private', $thirdRandom.'-'.$user->uuid.'.'.$request->file('file-3')->extension());
             } else {
               response()->json(['message'=>'Third file already exists!'], 400);
             }
@@ -144,8 +148,12 @@ class FileUpload extends Controller
       $ext = $file->ext;
       $rename = str_replace(['"', "/", "\\", ":", "<", ">", "*", "?", "|"], "_", $request->rename);
       $rename = preg_replace('/_+/', '_', $rename);
+      $reId = Str::random(40);
+      $userId = $user->uuid;
+
       if ($file->owner_id === $user->uuid) {
-        $update = File::where('name', $file->name)->update(['name' => $rename]);
+        $update = File::where('name', $file->name)->update(['name' => $rename, 'title' => $reId.'-'.$userId.'.'.$ext]);
+        Storage::move('private/'.$file->title, 'private/'.$reId.'-'.$userId.'.'.$ext);
         return response()->json(['message'=>'File has been renamed!']); 
       }
       return response()->json(['message'=>'You didn\'t post this file!'], 404);
