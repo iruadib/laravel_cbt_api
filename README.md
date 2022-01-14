@@ -5,8 +5,8 @@ Alhamdulillah, atas izin Allah SWT. projek ini berhasil diselesaikan tanpa kuran
 
 ## Kontributor
 Adapun semua orang yang terlibat dalam projek ini antara lain : 
-* [Khoirul Adib F.](https://github.com/iruadib)
-* [Muhammad Haidar](https://github.com/cutiepandaa)
+* [Iru KAF](https://github.com/iruadib)
+* [Mjedor](https://github.com/cutiepandaa)
 
 ## Setup
 Untuk menjalankan projek ini, lakukan langkah berikut:
