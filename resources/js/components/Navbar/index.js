@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useRef } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 
 const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
@@ -45,6 +45,8 @@ const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
     });
     axios.post('/api/logout').then(res => {
       if (res.status === 200) {
+        handleAuth(false);
+        handleId("");
         Cookies.remove('access_token', { expires: 7, sameSite: 'Strict' });
         navigate('/login', { replace: true });
       }
@@ -58,7 +60,7 @@ const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
     <div className={`${styles.navbar} ${styles.present}`} ref={node => { innerRef.current = node, navBarRef.current = node }}>
       <div className={styles.cont}>
           <ul>
-            <li><a href="#">ヴァイオレット・エヴァーガーデン</a></li>
+            <li><Link to="/">ヴァイオレット・エヴァーガーデン</Link></li>
           </ul>
           <ul>
             {auth ?

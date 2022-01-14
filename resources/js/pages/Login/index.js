@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import styles from './style.module.scss';
 import components from '../../components/components.module.scss';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Login = () => {
@@ -15,6 +15,8 @@ const Login = () => {
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const hasPreviouseState = location.key !== 'default';
   
   useEffect(() => {
     let isMounted = true;
@@ -47,7 +49,7 @@ const Login = () => {
           setLoading(false);
           setMsg("Success!");
           Cookies.set('access_token', res.data.access_token, { expires: 1, sameSite: 'Strict' });
-          navigate('/', { replace: true });
+          navigate(hasPreviouseState ? -1 : '/', { replace: true });
         }
       }).catch(err => {
         setLoading(false);

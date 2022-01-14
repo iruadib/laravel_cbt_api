@@ -11,16 +11,18 @@ import Upload from "./Upload";
 import Navbar from "../components/Navbar";
 import styles from './router.module.scss';
 
-const AuthRoutesHandler = () => {
+const AuthRoutesHandler = ({ auth }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const hasPreviouseState = location.key !== 'default';
 
   useEffect(() => {
-    if (hasPreviouseState) {
-      navigate(-1);
-    } else {
-      navigate("/");
+    if (auth) {
+      if (hasPreviouseState) {
+        navigate(-1);
+      } else {
+        navigate("/");
+      }
     }
   }, []);
   return <></>
@@ -49,8 +51,8 @@ const Router = () => {
       <div className={styles.wrapper} ref={contRef}>
         <Routes>
           <Route path="/" element={auth ? <App id={id} /> : <Navigate to="/login" />} />
-          <Route path="/login" element={auth ? <AuthRoutesHandler /> : <Login />} />
-          <Route path="/signup" element={auth ? <AuthRoutesHandler /> : <Signup />} />
+          <Route path="/login" element={auth ? <AuthRoutesHandler auth={auth} /> : <Login />} />
+          <Route path="/signup" element={auth ? <AuthRoutesHandler auth={auth} /> : <Signup />} />
           <Route path="/upload" element={auth ? <Upload /> : <Navigate to="/login" />} />
           <Route path="/delete" element={auth ? <Delete /> : <Navigate to="/login" />} />
           <Route path="/rename" element={auth ? <Rename /> : <Navigate to="/login" />} />
