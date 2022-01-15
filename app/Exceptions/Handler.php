@@ -8,6 +8,9 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Exceptions\InvalidOrderException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,6 +57,15 @@ class Handler extends ExceptionHandler
         });
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return response()->json(['message' => $e->getMessage()], 405);
+        });
+        $this->renderable(function (AccessDeniedHttpException $e, $request) {
+            return response()->json(['message' => 'You don\'t have permission to access this resource!'], 403);
+        });
+        $this->renderable(function (TooManyRequestsHttpException $e, $request) {
+            return response()->json(['message' => 'Your rate limit exceeded!'], 429);
+        });
+        $this->renderable(function (RouteNotFoundException $e, $request) {
+            return response()->json(['message' => $e->getMessage()], 500);
         });
     }
 }
