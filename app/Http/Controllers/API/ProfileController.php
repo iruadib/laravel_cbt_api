@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -48,16 +50,18 @@ class ProfileController extends Controller
       $image = $request->file('profile');
       if ($request->hasFile('profile')) {
         $findFile = Profile::where('owner_id', $user->uuid)->first();
-        
+        $randomName = Str::random(15);
+        $secondRandom = Str::random(20);
+        $date = Carbon::now()->getTimestampMs();
         if (!$findFile) {
           $file = Profile::Create([
-            'title' => $id.'.'.$request->file('profile')->extension(),
+            'title' => $randomName.$date.$secondRandom.'.'.$request->file('profile')->extension(),
             'owner' => $user->name,
             'owner_id' => $user->uuid,
             'ext' => $request->file('profile')->extension(),
           ]);
-          $path = $image->storeAs('public/profile', $user->uuid.'.'.$request->file('profile')->extension());
-          return response()->json(['message'=> $id.'.'.$request->file('profile')->extension()], 200);
+          $path = $image->storeAs('public/profile', $randomName.$date.$secondRandom.'.'.$request->file('profile')->extension());
+          return response()->json(['message'=> $randomName.$date.$secondRandom.'.'.$request->file('profile')->extension()], 200);
         } else {
           return response()->json(['profile'=>['Please delete your profile picture first!']], 400);
         }
