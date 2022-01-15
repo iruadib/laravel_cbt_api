@@ -71,7 +71,7 @@ class FileUpload extends Controller
       if ($request->hasFile('file-1')) {
         $firstFileName = pathinfo($request->file('file-1')->getClientOriginalName(), PATHINFO_FILENAME);
         $findFirstFile = File::where('name', $firstFileName)->first();
-        $firstRandom = Str::random(40);
+        $firstRandom = (string) Str::uuid();
         if (!$findFirstFile) {
           $file = File::Create([
             'title' => $firstRandom.'-'.$user->uuid.'.'.$request->file('file-1')->extension(),
@@ -88,7 +88,7 @@ class FileUpload extends Controller
         if ($request->hasFile('file-2')) {
           $secondFileName = pathinfo($request->file('file-2')->getClientOriginalName(), PATHINFO_FILENAME);
           $findSecondFile = File::where('title', $secondFileName)->first();
-          $secondRandom = Str::random(40);
+          $secondRandom = (string) Str::uuid();
           if (!$findSecondFile) {
             $file = File::Create([
               'title' => $secondRandom.'-'.$user->uuid.'.'.$request->file('file-2')->extension(),
@@ -106,7 +106,7 @@ class FileUpload extends Controller
           if ($request->hasFIle('file-3')) {
             $thirdFileName = pathinfo($request->file('file-3')->getClientOriginalName(), PATHINFO_FILENAME);
             $findThirdFile = File::where('title', $request->file('file-3')->getClientOriginalName())->first();
-            $thirdRandom = Str::random(40);
+            $thirdRandom = (string) Str::uuid();
             if (!$findThirdFile) {
               $file = File::Create([
                 'title' => $thirdRandom.'-'.$user->uuid.'.'.$request->file('file-3')->extension(),
@@ -148,7 +148,7 @@ class FileUpload extends Controller
       $ext = $file->ext;
       $rename = str_replace(['"', "/", "\\", ":", "<", ">", "*", "?", "|"], "_", $request->rename);
       $rename = preg_replace('/_+/', '_', $rename);
-      $reId = Str::random(40);
+      $reId = (string) Str::uuid();
       $userId = $user->uuid;
 
       if ($file->owner_id === $user->uuid) {

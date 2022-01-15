@@ -53,7 +53,7 @@ const Delete = () => {
             </div>
             <div className={components['grid-12']}>
               <div className={`${styles.subcont} ${components['col-6']}`}>
-                <Link to="/" className={`${styles.btn} ${components['col-12']}`}>no</Link>
+                <Link to="/" className={`${styles.btn} ${components['col-12']}`}>back</Link>
               </div>
               <div className={`${styles.subcont} ${components['col-6']}`}>
                 <Link to={`/delete?id=${id}`} onClick={handleClick} className={`${styles.btn} ${components['col-12']}`}>yes</Link>
