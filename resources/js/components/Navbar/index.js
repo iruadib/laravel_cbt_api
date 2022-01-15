@@ -20,7 +20,7 @@ const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
     const controller = new AbortController();
 
     axios.interceptors.request.use((config) => {
-      let token = Cookies.get('access_token');
+      const token = Cookies.get('access_token');
       config.headers.Authorization = token && `Bearer ${token}`;
       return config;
     });
@@ -47,6 +47,7 @@ const Navbar = ({ handleAuth, handleId, auth, innerRef }) => {
       if (res.status === 200) {
         handleAuth(false);
         handleId("");
+        localStorage.setItem('location', `${location.pathname}${location.search && `${location.search}`}`);
         Cookies.remove('access_token', { expires: 7, sameSite: 'Strict' });
         navigate('/login', { replace: true });
       }

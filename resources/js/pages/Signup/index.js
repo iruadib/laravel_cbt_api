@@ -15,14 +15,17 @@ const Signup = () => {
   const [error, setError] = useState({});
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
+  const [localLoc, setLocalLoc] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const hasPreviouseState = location.key !== 'default';
+  const hasPreviousState = location.key !== 'default';
 
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
       document.title = "Signup Form | React App";
+      const loc = localStorage.getItem('location');
+      setLocalLoc(loc);
     }
     return () => {
       isMounted = false;
@@ -51,7 +54,8 @@ const Signup = () => {
           setLoading(false);
           setMsg("Success!");
           Cookies.set('access_token', res.data.access_token, { expires: 1, sameSite: 'Strict' });
-          navigate(hasPreviouseState ? -1 : '/', { replace: true });
+          navigate(!localLoc ? (hasPreviousState ? -1 : '/') : localLoc, { replace: true });
+          localStorage.removeItem('location');
         }
       }).catch(err => {
         setLoading(false);
